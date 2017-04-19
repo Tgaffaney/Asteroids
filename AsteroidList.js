@@ -1,34 +1,40 @@
-function new_AsteroidList(ast){
-	var alist = new createjs.Shape();
-	alist.arr = [ast];
-	return alist;
-}
-
-function AsteroidList_Add(e, ast){
-	e.arr.push(ast);
-}
-
-function AsteroidList_GetAll(e){
-
-}
-
-function AsteroidList_DeleteAll(e){
-	for(var i = 0; i < e.arr.length; i++){
-		e.arr.pop();
+function new_AsteroidList(){
+	var a = new createjs.DisplayObject();
+	a.list = [];
+	a.add = function(e){
+		this.list.push(e);
+		stage.addChild(e);
 	}
-}
 
-function AsteroidList_IsEmpty(e){
-	if(e.arr.length < 1)
-		return true;
-	else
-		return false;
-}
+	a.count = function(){
+		return this.list.length;
+	}
 
-function AsteroidList_Count(e){
-	return e.arr.length;
-}
+	a.isEmpty = function(){
+		return this.list.length == 0;
+	}
 
-function AsteroidList_Remove(e, ast){
-	e.arr.splice(ast);
+	a.getAll = function(){
+		return this.list;
+	}
+
+	a.removeAll = function(){
+		for(var x = 0; x < this.list.length; x++){
+			stage.removeChild(this.list[x]);
+		}
+		stage.update();
+
+		this.list = [];
+	}
+
+	a.remove = function(e){
+		var index = this.list.indexOf(e);
+		if(index !== -1) {
+		  this.list.splice(index, 1);
+		}
+		stage.removeChild(e);
+		stage.update();
+	}
+
+	return a;
 }

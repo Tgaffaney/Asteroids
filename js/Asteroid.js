@@ -43,11 +43,6 @@ function new_Asteroid(x,y,xVel,yVel,type){
     ast.update = function(){
         this.x += this.xVelocity;
         this.y += this.yVelocity;
-        stage.update(this);
-    }
-
-    ast.render = function(){
-
     }
 
     return ast;
@@ -55,6 +50,6 @@ function new_Asteroid(x,y,xVel,yVel,type){
 
 var ASTEROID = {
     small : 10,
-    medium : 36,
-    large : 72
+    medium : 20,
+    large : 40
 }

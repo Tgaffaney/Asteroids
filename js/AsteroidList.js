@@ -3,7 +3,7 @@ function new_AsteroidList(){
 	a.list = [];
 	a.add = function(e){
 		this.list.push(e);
-		stage.addChild(e);
+		stage.addChildAt(e, 0);
 	}
 
 	a.count = function(){
@@ -34,6 +34,12 @@ function new_AsteroidList(){
 		}
 		stage.removeChild(e);
 		stage.update();
+	}
+
+	a.update = function(){
+		for(var x = 0; x < this.list.length; x++){
+			this.list[x].update();
+		}
 	}
 
 	return a;

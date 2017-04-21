@@ -8,21 +8,13 @@ function new_Bullet( xP, yP, xV, yV){
 	shape.xVelocity = xV;
 	shape.yVelocity = yV;
 
+	shape.getLocation = function(){
+		return { x : this.x, y : this.y};
+	}
+	shape.update = function(){
+		this.x += this.xVelocity;
+		this.y += this.yVelocity;
+	}
+
 	return shape;
-}
-
-function Bullet_GetLocation(e){
-
-}
-
-function Bullet_Update(e){
-
-}
-
-function Bullet_Render(e){
-
-}
-
-function Bullet_Delete(e){
-
 }

@@ -43,9 +43,13 @@ function new_Player(xpos, ypos){
 		return obj;
 	}
 
-	shape.getLives = function(){
+	shape.getLivesString = function(){
 		var r = this.lives.toString();
 		return r;
+	}
+
+	shape.getLives = function(){
+		return this.lives;
 	}
 
 	shape.setPosition = function(x,y){
@@ -113,7 +117,18 @@ function new_Player(xpos, ypos){
 	}
 
 	shape.died = function(){
-
+		if(this.lives != 0){
+			this.visible = false;
+			this.x = 345;
+			this.y = 295;
+			Asteroid_List.removeAll();
+			this.visible = true;
+			this.lives--;
+		}
+		else
+			stage.removeChild(this);
+			Game_end();
+		
 	}
 
 	return shape;

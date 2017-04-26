@@ -6,6 +6,8 @@ var Score_Object;
 var Stats_Object;
 var stage;
 var Game_State;
+var scoreText;
+var livesText;
 
 //Overlay Containers
 var Pause_Container;
@@ -60,11 +62,11 @@ function Game_createStatBox(){
 	cc.y = 10;
 	cc.alpha = 0.8;
 
-	var scoreText = new createjs.Text("Score : " + Score_Object.getCurrentScore(), "15px Arial", "#fff");
+	scoreText = new createjs.Text("Score : " + Score_Object.getCurrentScore(), "15px Arial", "#fff");
 	scoreText.x = 15;
 	scoreText.y = 15;
 
-	var livesText = new createjs.Text("Lives : " + Player_Object.getLives(), "15px Arial", "#fff");
+	livesText = new createjs.Text("Lives : " + Player_Object.getLives(), "15px Arial", "#fff");
 	livesText.x = 15;
 	livesText.y = 55;
 
@@ -75,6 +77,15 @@ function Game_createStatBox(){
 
 	stage.addChild(contain);
 	stage.update();
+	//setTimeout(function(){ scoreText.text = "Score : " + Score_Object.addScore(); stage.update();}, 2000);
+	//setTimeout(function(){ scoreText.text = "Score : " + Score_Object.addScore(); stage.update();}, 4000);
+	//setTimeout(function(){ scoreText.text = "Score : " + Score_Object.addScore(); stage.update();}, 6000);
+	//setTimeout(function(){ Player_Object.changeLife(1); livesText.text = "Lives : " + Player_Object.getLives(); stage.update();}, 3000);
+	//setTimeout(function(){ Player_Object.changeLife(1); livesText.text = "Lives : " + Player_Object.getLives(); stage.update();}, 5000);
+	setTimeout(function(){Player_Object.died();}, 2000);
+	setTimeout(function(){Player_Object.died();}, 4000);
+	setTimeout(function(){Player_Object.died();}, 6000);
+	setTimeout(function(){Player_Object.died();}, 8000);
 }
 
 function Game_hideStartOverlay(){

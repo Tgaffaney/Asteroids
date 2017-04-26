@@ -53,6 +53,30 @@ function Game_showStartOverlay(){
 	Game_State = GAME.starting
 }
 
+function Game_createStatBox(){
+	var cc = new createjs.Shape();
+	cc.graphics.beginFill('#666').drawRect(0, 0, 90, 70);
+	cc.x = 10;
+	cc.y = 10;
+	cc.alpha = 0.8;
+
+	var scoreText = new createjs.Text("Score : " + Score_Object.getCurrentScore(), "15px Arial", "#fff");
+	scoreText.x = 15;
+	scoreText.y = 15;
+
+	var livesText = new createjs.Text("Lives : " + Player_Object.getLives(), "15px Arial", "#fff");
+	livesText.x = 15;
+	livesText.y = 55;
+
+	var contain = new createjs.Container();
+	contain.addChild(cc);
+	contain.addChild(scoreText);
+	contain.addChild(livesText);
+
+	stage.addChild(contain);
+	stage.update();
+}
+
 function Game_hideStartOverlay(){
 	stage.removeChild(Start_Container);
 	stage.update();
@@ -70,6 +94,10 @@ function Game_start(){
 	Player_Object = new_Player( 345, 295);
 	stage.addChild(Player_Object);
 	stage.update();
+
+	Score_Object = new_Score();
+
+	Game_createStatBox();
 
 	Game_unpause();
 	Game_State = GAME.running;

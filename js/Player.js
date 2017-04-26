@@ -44,7 +44,8 @@ function new_Player(xpos, ypos){
 	}
 
 	shape.getLives = function(){
-		return this.lives;
+		var r = this.lives.toString();
+		return r;
 	}
 
 	shape.setPosition = function(x,y){

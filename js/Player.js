@@ -117,7 +117,7 @@ function new_Player(xpos, ypos){
 	}
 
 	shape.died = function(){
-		if(this.lives != 0){
+		if(this.lives > 0){
 			this.visible = false;
 			this.x = 345;
 			this.y = 295;
@@ -125,10 +125,10 @@ function new_Player(xpos, ypos){
 			this.visible = true;
 			this.lives--;
 		}
-		else
+		else{
 			stage.removeChild(this);
 			Game_end();
-		
+		}
 	}
 
 	return shape;

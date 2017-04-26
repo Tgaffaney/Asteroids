@@ -122,6 +122,22 @@ function Game_end(){
 	Game_State = GAME.none;
 
 	Game_State = GAME.ended;
+
+	var gameOverBox = new createjs.Shape();
+	gameOverBox.graphics.beginFill("#666").drawRect(0, 0, 400, 90);
+	gameOverBox.x = 150;
+	gameOverBox.y = 240;
+	gameOverBox.alpha = 0.8;
+
+	var gameover = new createjs.Text("Game Over", "30px Arial", "#BBB");
+	gameover.x = 270;
+	gameover.y = 250;
+
+	var gameOverContainer = new createjs.Container();
+	gameOverContainer.addChild(gameOverBox);
+	gameOverContainer.addChild(gameover);
+	stage.addChild(gameOverContainer);
+	stage.update();
 }
 
 function Game_initStage(){
@@ -275,7 +291,10 @@ function Game_update(){
 			Player_Object.update();
 		if(Bullet_List != null)
 			Bullet_List.update();
-
+		if(Game_State == GAME.running){
+			updateLivesText();
+			updateScoreText();
+		}
 		//Pauses the game if users focuses on a different webpage or program
 		if(!document.hasFocus() && Game_State == GAME.running){
 			Game_pauseWithOverlay();
@@ -371,4 +390,24 @@ var GAME = {
 	running : 2,
 	ended : 3,
 	none : 4
+}
+
+function updateLivesText(){
+	var x = livesText.text;
+	if(x === Player_Object.getLivesString()){
+
+	}
+	else{
+		livesText.text = "Lives : " + Player_Object.getLivesString();
+	}
+}
+
+function updateScoreText(){
+	var x = scoreText.text;
+	if( x === Score_Object.getCurrentScoreString()){
+
+	}
+	else{
+		scoreText.text = "Score : " + Score_Object.getCurrentScoreString();
+	}
 }

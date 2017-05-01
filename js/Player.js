@@ -1,9 +1,17 @@
 
 function new_Player(xpos, ypos){
-	var shape = new createjs.Shape();
-	shape.graphics.beginFill('red');
-	shape.graphics.moveTo(0, 0).lineTo(20, 0).lineTo(10, 30).lineTo(0, 0);
-
+	//Building shapes to create Player object
+	var triangle = new createjs.Shape();
+	triangle.graphics.beginFill('#fff');
+	triangle.graphics.moveTo(0, 0).lineTo(20, 0).lineTo(10, 30).lineTo(0, 0);
+	var win = new createjs.Shape();
+	win.graphics.beginFill("#b3ecff");
+	win.graphics.drawRect(8, 5, 5, 10);
+	//Creating container and adding shapes to container
+	var shape = new createjs.Container();
+	shape.addChild(triangle);
+	shape.addChild(win);
+	//Adding extra properties to the player shape
 	shape.lives = 3;
 	shape.width = 20;
 	shape.height = 30;
@@ -24,15 +32,13 @@ function new_Player(xpos, ypos){
 	shape.player_rotation_speed = 6;
 	shape.firing_rate = 15;
 	
+	//Gets current position of player
 	shape.getPosition = function(){
 		var obj = { x:this.x, y:this.y }
 		return obj;
 	}
 
-	shape.getNextBounds = function(){
-
-	}
-
+	//Gets current bounds of player
 	shape.getBounds = function(){
 		var obj = { 
 			left : this.x,
@@ -45,35 +51,42 @@ function new_Player(xpos, ypos){
 		return obj;
 	}
 
+	//Returns the center x and y of the player
 	shape.getCenter = function(){
 		nX = (this.x + (this.x + this.width))/2;
 		nY = ((this.y + (this.y + this.height))/2);
 		return obj = {x: nX, y: nY};
 	}
 
+	//Returns string version of lives property
 	shape.getLivesString = function(){
 		var r = this.lives.toString();
 		return r;
 	}
 
+	//returns int version of lives property
 	shape.getLives = function(){
 		return this.lives;
 	}
 
+	//Sets position of player
 	shape.setPosition = function(x,y){
 		this.x = x;
 		this.y = y;
 	}
 
+	//Sets velocity of player
 	shape.setVelocity = function(xv,yv){
 		this.xVelocity = xv,
 		this.yVelocity = yv
 	}
 
+	//Changes amount of lives player has
 	shape.changeLife = function(i){
 		this.lives -= i;
 	}
 
+	//Updates the player object
 	shape.update = function(){
 		if(this.moveForward){
 			var obj = this.getNextXY();
@@ -92,6 +105,7 @@ function new_Player(xpos, ypos){
 		}
 	}
 
+	//Allows player to shoot bullets
 	shape.shoot = function(){
 		var curX = this.x;
 		var curY = this.y;
@@ -101,6 +115,7 @@ function new_Player(xpos, ypos){
 		Bullet_List.add(bullet);
 	}
 
+	//Rotates player object
 	shape.rotateFunc = function(x){
 		this.rotation += x;
 
@@ -112,6 +127,7 @@ function new_Player(xpos, ypos){
 			this.direction += x;		
 	}
 
+	//Gets the next X and Y coordinates of the player
 	shape.getNextXY = function(){
 		var curX = this.x;
 		var curY = this.y;
@@ -124,13 +140,12 @@ function new_Player(xpos, ypos){
 		return { x : nexX, y : nexY };
 	}
 
+	//Handles what happens when the player dies (Sets him back to middle and removes asteroids from the list)
 	shape.died = function(){
 		if(this.lives > 0){
-			
 			Asteroid_List.removeAll();
 			Game_pauseWithoutOverlay();
 			this.lives--;
-			
 			createjs.Tween.get(this).to({x: 345, y: 295}, 700).addEventListener("change", handleChange);
 			function handleChange(){
 				Asteroid_List.removeAll();
@@ -142,10 +157,10 @@ function new_Player(xpos, ypos){
 			Game_end();
 		}
 	}
-
 	return shape;
 }
 
+//Different values for player movement
 var MOVE = {
 	right : 0,
 	left : 1,

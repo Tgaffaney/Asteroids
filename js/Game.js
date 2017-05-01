@@ -101,7 +101,7 @@ function Game_start(){
 
 	Asteroid_List.removeAll();
 
-	Asteroid_Generator.timeUntilNextAsteroid = 700;
+	Asteroid_Generator.timeUntilNextAsteroid = 500;
 	Asteroid_Generator.speed = 2;
 
 	Player_Object = new_Player( 345, 295);
@@ -183,7 +183,7 @@ function Game_setControls(){
 		up_arrow : 38,
 		left_arrow : 37,
 		down_arrow : 40,
-		spacebar : 16,
+		spacebar : 65,
 		escape : 27,
 		enter : 13
 
@@ -282,11 +282,11 @@ function Game_setControls(){
 }
 
 function Game_update(){
-	ticks++;
 
 	stuff = Asteroid_List.getAll();
 
 	if(!createjs.Ticker.paused){
+		ticks++
 		if(Asteroid_List != null){
 			checkBorder();
 			Asteroid_List.update();
@@ -305,6 +305,20 @@ function Game_update(){
 			Game_pauseWithOverlay();
 		}
 
+		//This makes the game harder.
+		if(ticks == 2400){
+			Asteroid_Generator.timeUntilNextAsteroid = LEVEL.two[1];
+			Asteroid_Generator.speed = LEVEL.two[0];
+		}else if(ticks == 4800){
+			Asteroid_Generator.timeUntilNextAsteroid = LEVEL.three[1];
+			Asteroid_Generator.speed = LEVEL.three[0];
+		}else if(ticks == 7200){
+			Asteroid_Generator.timeUntilNextAsteroid = LEVEL.four[1];
+			Asteroid_Generator.speed = LEVEL.four[0];
+		}else if(ticks == 9600){
+			Asteroid_Generator.timeUntilNextAsteroid = LEVEL.five[1];
+			Asteroid_Generator.speed = LEVEL.five[0];
+		}
 	}else{
 
 	}
@@ -415,4 +429,12 @@ function updateScoreText(){
 	else{
 		scoreText.text = "Score : " + Score_Object.getCurrentScoreString();
 	}
+}
+
+var LEVEL = {
+	one : [2,500],
+	two : [2,450],
+	three : [3,450],
+	four : [3,400],
+	five : [4,400]
 }

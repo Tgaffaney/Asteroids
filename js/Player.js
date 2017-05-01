@@ -44,8 +44,8 @@ function new_Player(xpos, ypos){
 	}
 
 	shape.getCenter = function(){
-		nX = (this.x + this.width)/2;
-		nY = (this.y + this.height)/2;
+		nX = (this.x + (this.x + this.width))/2;
+		nY = ((this.y + (this.y + this.height))/2) + 20;
 		return obj = {x: nX, y: nY};
 	}
 

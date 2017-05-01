@@ -29,7 +29,7 @@ function new_Asteroid(x,y,xVel,yVel,type){
     }
 
     ast.getCenterLocation = function(){
-        return { x : this.x + this.width / 2, y : this.y + this.width / 2  }
+        return { x : (this.x + (this.x + this.width)) / 2, y : (this.y + (this.y + this.width)) / 2  }
     }
 
     ast.getAsteroidType = function(){

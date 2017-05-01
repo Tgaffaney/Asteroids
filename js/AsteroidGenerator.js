@@ -1,15 +1,26 @@
 function init_AsteroidGenerator(){
 	Asteroid_Generator = new createjs.DisplayObject();
 
+	//Local variables
+
 	Asteroid_Generator.isRunning = false;
 	Asteroid_Generator.timeUntilNextAsteroid = 500;
 	Asteroid_Generator.margin = 40;
 	Asteroid_Generator.speed = 2;
 
+	//Functions
+
+	//This is called to start the asteroid generating process
+	Asteroid_Generator.start = function(){
+		Asteroid_Generator.isRunning = true;
+	}
+
+	//Calling this causes the generator to stop generation asteroids.
 	Asteroid_Generator.stop = function(){
 		Asteroid_Generator.isRunning = false;
 	}
 
+	//Calling this generates a random asteroid and returns it.
 	Asteroid_Generator.generateRandomAsteroid = function(){
 		var sideInt = Math.floor(Math.random() * 4 + 1);
 		var height = 600;
@@ -21,6 +32,8 @@ function init_AsteroidGenerator(){
 		var xv;
 		var yv;
 		var type;
+
+		//This decides what side the asteroid will come from.
 		switch(sideInt){
 			case 1: //Left
 				var XandY = getRandomXYForLeftWall(speed);
@@ -99,10 +112,12 @@ function init_AsteroidGenerator(){
 				}
 				break;
 		}
+		//This adds the generated asteroid to the Asteroid List
 		var ast = new_Asteroid(x,y,xv,yv,type);
 		Asteroid_List.add(ast);
 	}
 
+	//This is a self-calling function that is used to continously generate asteroids.
 	Asteroid_Generator.generate = function(){
 		if(Asteroid_Generator.isRunning){
 			Asteroid_Generator.generateRandomAsteroid();
@@ -111,9 +126,4 @@ function init_AsteroidGenerator(){
 			Asteroid_Generator.generate();
 		},Asteroid_Generator.timeUntilNextAsteroid);
 	}
-
-	Asteroid_Generator.start = function(){
-		Asteroid_Generator.isRunning = true;
-	}
-
 }

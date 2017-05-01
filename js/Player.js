@@ -5,8 +5,8 @@ function new_Player(xpos, ypos){
 	shape.graphics.moveTo(0, 0).lineTo(20, 0).lineTo(10, 30).lineTo(0, 0);
 
 	shape.lives = 3;
-	shape.width = 60;
-	shape.height = 90;
+	shape.width = 20;
+	shape.height = 30;
 	shape.isThrusting = false;
 	shape.direction = 180;
 	shape.yVelocity = 0.0;
@@ -38,14 +38,16 @@ function new_Player(xpos, ypos){
 			left : this.x,
 			right : this.x + this.width,
 			top : this.y,
-			bottom : this.y + this.height
+			bottom : this.y + this.height,
+			width : this.width,
+			height : this.height
 		}
 		return obj;
 	}
 
 	shape.getCenter = function(){
 		nX = (this.x + (this.x + this.width))/2;
-		nY = ((this.y + (this.y + this.height))/2) + 20;
+		nY = ((this.y + (this.y + this.height))/2);
 		return obj = {x: nX, y: nY};
 	}
 
@@ -124,12 +126,16 @@ function new_Player(xpos, ypos){
 
 	shape.died = function(){
 		if(this.lives > 0){
-			this.visible = false;
-			this.x = 345;
-			this.y = 295;
+			
 			Asteroid_List.removeAll();
-			this.visible = true;
+			Game_pauseWithoutOverlay();
 			this.lives--;
+			
+			createjs.Tween.get(this).to({x: 345, y: 295}, 700).addEventListener("change", handleChange);
+			function handleChange(){
+				Asteroid_List.removeAll();
+			}
+			Game_unpause();	
 		}
 		else{
 			stage.removeChild(this);

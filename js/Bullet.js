@@ -1,7 +1,7 @@
 function new_Bullet( xP, yP, xV, yV){
 	var shape = new createjs.Shape();
 	shape.graphics.beginFill('#ffffff');
-	shape.graphics.drawCircle(0, 0, 5);
+	shape.graphics.drawCircle(0, 0, 3);
 
 	shape.x = xP;
 	shape.y = yP;

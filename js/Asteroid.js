@@ -4,28 +4,33 @@ function new_Asteroid(x,y,xVel,yVel,type){
     switch(type){
       case ASTEROID.small:
         size = ASTEROID.small;
+        ast = new createjs.Bitmap('Asteroid-sm.png');
         break;
       case ASTEROID.medium:
         size = ASTEROID.medium;
+        ast = new createjs.Bitmap('Asteroid-md.png');
         break;
       case ASTEROID.large:
         size = ASTEROID.large;
+        ast = new createjs.Bitmap('Asteroid-lg.png');
         break;
       }
       
-    var ast = new createjs.Shape();
+    
+
     ast.x = x;
     ast.y = y;
-    ast.graphics.beginFill(color).drawCircle(0,0,size);
+    ast.rotate = 0;
     ast.asteroidType = type;
     ast.xVelocity = xVel;
     ast.yVelocity = yVel;
-    ast.height = size;
-    ast.width = size;
+    ast.height = size * 2;
+    ast.width = size * 2;
     ast.type = type;
 
     ast.getBounds = function(){
-        return { left : this.x, right : this.x + this.width, top : this.y, bottom : this.y + this.height } 
+        var thresh = 4;
+        return { left : this.x + thresh, right : this.x + this.width - thresh, top : this.y + thresh, bottom : this.y + this.height - thresh, width : this.width, height : this.height, size : this.size } 
     }
 
     ast.getCenterLocation = function(){

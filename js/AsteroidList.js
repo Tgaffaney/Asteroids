@@ -38,6 +38,7 @@ function new_AsteroidList(){
 
 	a.update = function(){
 		for(var x = 0; x < this.list.length; x++){
+			this.list[x].rotation += this.list[x].rotate;
 			this.list[x].update();
 		}
 	}

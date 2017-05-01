@@ -12,7 +12,7 @@ function init_AsteroidGenerator(){
 
 	Asteroid_Generator.generateRandomAsteroid = function(){
 		var sideInt = Math.floor(Math.random() * 4 + 1);
-		var height = 500;
+		var height = 600;
 		var width = 700;
 		var speed = this.speed;
 		var margin = this.margin;

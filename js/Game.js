@@ -298,7 +298,7 @@ function Game_update(){
 		if(Game_State == GAME.running){
 			updateLivesText();
 			updateScoreText();
-			checkPlayerCollisions();
+			checkAllCollisions();
 		}
 		//Pauses the game if users focuses on a different webpage or program
 		if(!document.hasFocus() && Game_State == GAME.running){

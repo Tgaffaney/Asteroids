@@ -18,6 +18,8 @@ var ticks = 0;
 var speedLbl;
 var generLbl;
 
+var stuff;
+
 function game_init(){
 	Game_State = GAME.none;
 	Game_initStage();
@@ -82,10 +84,10 @@ function Game_createStatBox(){
 	//setTimeout(function(){ scoreText.text = "Score : " + Score_Object.addScore(); stage.update();}, 6000);
 	//setTimeout(function(){ Player_Object.changeLife(1); livesText.text = "Lives : " + Player_Object.getLives(); stage.update();}, 3000);
 	//setTimeout(function(){ Player_Object.changeLife(1); livesText.text = "Lives : " + Player_Object.getLives(); stage.update();}, 5000);
-	setTimeout(function(){Player_Object.died();}, 2000);
-	setTimeout(function(){Player_Object.died();}, 4000);
-	setTimeout(function(){Player_Object.died();}, 6000);
-	setTimeout(function(){Player_Object.died();}, 8000);
+	//setTimeout(function(){Player_Object.died();}, 2000);
+	//setTimeout(function(){Player_Object.died();}, 4000);
+	//setTimeout(function(){Player_Object.died();}, 6000);
+	//setTimeout(function(){Player_Object.died();}, 8000);
 }
 
 function Game_hideStartOverlay(){
@@ -282,6 +284,8 @@ function Game_setControls(){
 function Game_update(){
 	ticks++;
 
+	stuff = Asteroid_List.getAll();
+
 	if(!createjs.Ticker.paused){
 		if(Asteroid_List != null){
 			checkBorder();
@@ -294,6 +298,7 @@ function Game_update(){
 		if(Game_State == GAME.running){
 			updateLivesText();
 			updateScoreText();
+			checkPlayerCollisions();
 		}
 		//Pauses the game if users focuses on a different webpage or program
 		if(!document.hasFocus() && Game_State == GAME.running){

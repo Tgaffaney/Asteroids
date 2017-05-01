@@ -43,6 +43,12 @@ function new_Player(xpos, ypos){
 		return obj;
 	}
 
+	shape.getCenter = function(){
+		nX = (this.x + this.width)/2;
+		nY = (this.y + this.height)/2;
+		return obj = {x: nX, y: nY};
+	}
+
 	shape.getLivesString = function(){
 		var r = this.lives.toString();
 		return r;

@@ -72,6 +72,7 @@ function Game_createStatBox(){
 	//Adding container to stage
 	stage.addChild(contain);
 	stage.update();
+}
 
 function Game_hideStartOverlay(){
 	//Hides the start overlay and removes from the stage
